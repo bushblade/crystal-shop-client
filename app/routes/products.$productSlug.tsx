@@ -2,6 +2,7 @@ import { defineQuery } from 'groq'
 import { redirect } from 'react-router'
 import { client } from '~/sanity/client'
 import type { Route } from './+types/products.$productSlug'
+import ProductGallery from '~/components/ProductGallery'
 
 // $productSlug here is a dynamic placeholder which we pass in as the second
 // argmuent in client.fetch in the loader function
@@ -36,9 +37,6 @@ export async function loader({ params }: Route.LoaderArgs) {
 export default function ProductPage({ loaderData }: Route.ComponentProps) {
   const { product } = loaderData
 
-  // Use the first image as the main featured image
-  const primaryImage = product.images[0]
-
   return (
     <>
       <title>{product.name}</title>
@@ -49,16 +47,7 @@ export default function ProductPage({ loaderData }: Route.ComponentProps) {
       <main className="max-w-7xl mx-auto p-4 md:p-8">
         <article className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Image Section */}
-          <section>
-            {primaryImage?.url && (
-              <img
-                src={primaryImage.url}
-                alt={primaryImage.alt || product.name}
-                className="w-full h-auto rounded-lg shadow-lg object-cover"
-              />
-            )}
-            {/* You could add a grid of thumbnail images here if you like */}
-          </section>
+          <ProductGallery images={product.images} productName={product.name} />
 
           {/* Details Section */}
           <section className="flex flex-col">
