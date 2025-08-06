@@ -9,6 +9,7 @@ import {
 
 import type { Route } from './+types/root'
 import './app.css'
+import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 
 export const links: Route.LinksFunction = () => [
@@ -26,18 +27,19 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-blue-100">
+      <body className="bg-blue-100 h-full flex flex-col">
         <Navbar />
-        {children}
+        <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
+        <Footer />
       </body>
     </html>
   )
