@@ -26,13 +26,13 @@ export default function ProductGallery({ images, productName }: Props) {
       <div className="aspect-square flex items-center justify-center">
         <img
           src={selectedImage.url}
-          alt={productName}
+          alt={`${productName}-main`}
           className="w-auto h-auto max-w-full max-h-full rounded-lg shadow-lg object-contain"
         />
       </div>
       {/* Thumbnail Images */}
       <div className="mt-4 grid grid-cols-4 gap-4">
-        {noneNullImages.map(image => (
+        {noneNullImages.map((image, index) => (
           <button
             key={image._key}
             type="button"
@@ -45,7 +45,7 @@ export default function ProductGallery({ images, productName }: Props) {
           >
             <img
               src={`${image.url}?auto=format&w=200&h=200&fit=crop&crop=center`}
-              alt={productName}
+              alt={`${productName}-thumbnail-${index}`}
               className={`w-full h-full object-cover ${image._key === selectedImage._key ? 'grayscale-50' : ''}`}
             />
           </button>
