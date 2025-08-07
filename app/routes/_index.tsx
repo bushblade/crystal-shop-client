@@ -4,7 +4,7 @@ import { client } from '~/sanity/client'
 import type { Route } from './+types/_index'
 
 // We need to define the query at the top level so that sanity typegen can generate our Types correctly
-const PRODUCTS_QUERY = defineQuery(`
+const LATEST_PRODUCTS_QUERY = defineQuery(`
   *[_type == "product" && stockLevel > 0] | order(_createdAt desc) {
     _id,
     name,
@@ -15,11 +15,11 @@ const PRODUCTS_QUERY = defineQuery(`
       "alt": asset->alt,
       "url": asset->url
     }
-  }
+  }[0...4]
 `)
 
 export async function loader() {
-  return { products: await client.fetch(PRODUCTS_QUERY) }
+  return { products: await client.fetch(LATEST_PRODUCTS_QUERY) }
 }
 
 export default function HomePage({ loaderData }: Route.ComponentProps) {

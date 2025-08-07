@@ -6,7 +6,7 @@ import ProductGallery from '~/components/ProductGallery'
 
 // $productSlug here is a dynamic placeholder which we pass in as the second
 // argmuent in client.fetch in the loader function
-const PRODUCT_QUERY = defineQuery(`
+const SINGLE_PRODUCT_QUERY = defineQuery(`
   *[_type == "product" && slug.current == $productSlug][0] {
     _id,
     name,
@@ -24,7 +24,7 @@ const PRODUCT_QUERY = defineQuery(`
 
 export async function loader({ params }: Route.LoaderArgs) {
   // We EXECUTE the query, passing the placeholder's value.
-  const product = await client.fetch(PRODUCT_QUERY, {
+  const product = await client.fetch(SINGLE_PRODUCT_QUERY, {
     // slug here needs to match our placeholder in the query
     productSlug: params.productSlug,
   })

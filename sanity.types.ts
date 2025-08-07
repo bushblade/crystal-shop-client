@@ -160,9 +160,9 @@ export type SanityAssetSourceData = {
 export type AllSanitySchemaTypes = Product | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/routes/_index.tsx
-// Variable: PRODUCTS_QUERY
-// Query: *[_type == "product" && stockLevel > 0] | order(_createdAt desc) {    _id,    name,    price,    "slug": slug.current,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }
-export type PRODUCTS_QUERYResult = Array<{
+// Variable: LATEST_PRODUCTS_QUERY
+// Query: *[_type == "product" && stockLevel > 0] | order(_createdAt desc) {    _id,    name,    price,    "slug": slug.current,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }[0...4]
+export type LATEST_PRODUCTS_QUERYResult = Array<{
   _id: string;
   name: string;
   price: number;
@@ -175,9 +175,9 @@ export type PRODUCTS_QUERYResult = Array<{
 }>;
 
 // Source: ./app/routes/products.$productSlug.tsx
-// Variable: PRODUCT_QUERY
+// Variable: SINGLE_PRODUCT_QUERY
 // Query: *[_type == "product" && slug.current == $productSlug][0] {    _id,    name,    "slug": slug.current,    price,    stockLevel,    description,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }
-export type PRODUCT_QUERYResult = {
+export type SINGLE_PRODUCT_QUERYResult = {
   _id: string;
   name: string;
   slug: string;
@@ -195,7 +195,7 @@ export type PRODUCT_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"product\" && stockLevel > 0] | order(_createdAt desc) {\n    _id,\n    name,\n    price,\n    \"slug\": slug.current,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": PRODUCTS_QUERYResult;
-    "\n  *[_type == \"product\" && slug.current == $productSlug][0] {\n    _id,\n    name,\n    \"slug\": slug.current,\n    price,\n    stockLevel,\n    description,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": PRODUCT_QUERYResult;
+    "\n  *[_type == \"product\" && stockLevel > 0] | order(_createdAt desc) {\n    _id,\n    name,\n    price,\n    \"slug\": slug.current,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }[0...4]\n": LATEST_PRODUCTS_QUERYResult;
+    "\n  *[_type == \"product\" && slug.current == $productSlug][0] {\n    _id,\n    name,\n    \"slug\": slug.current,\n    price,\n    stockLevel,\n    description,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": SINGLE_PRODUCT_QUERYResult;
   }
 }
