@@ -176,10 +176,11 @@ export type PRODUCTS_QUERYResult = Array<{
 
 // Source: ./app/routes/products.$productSlug.tsx
 // Variable: PRODUCT_QUERY
-// Query: *[_type == "product" && slug.current == $productSlug][0] {    _id,    name,    price,    stockLevel,    description,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }
+// Query: *[_type == "product" && slug.current == $productSlug][0] {    _id,    name,    "slug": slug.current,    price,    stockLevel,    description,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }
 export type PRODUCT_QUERYResult = {
   _id: string;
   name: string;
+  slug: string;
   price: number;
   stockLevel: number;
   description: string | null;
@@ -195,6 +196,6 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"product\" && stockLevel > 0] | order(_createdAt desc) {\n    _id,\n    name,\n    price,\n    \"slug\": slug.current,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": PRODUCTS_QUERYResult;
-    "\n  *[_type == \"product\" && slug.current == $productSlug][0] {\n    _id,\n    name,\n    price,\n    stockLevel,\n    description,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": PRODUCT_QUERYResult;
+    "\n  *[_type == \"product\" && slug.current == $productSlug][0] {\n    _id,\n    name,\n    \"slug\": slug.current,\n    price,\n    stockLevel,\n    description,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": PRODUCT_QUERYResult;
   }
 }
