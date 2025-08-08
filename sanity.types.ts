@@ -191,11 +191,27 @@ export type SINGLE_PRODUCT_QUERYResult = {
   }>;
 } | null;
 
+// Source: ./app/routes/products.tsx
+// Variable: ALL_PRODUCTS_QUERY
+// Query: *[_type == "product" && stockLevel > 0] | order(_createdAt desc) {    _id,    name,    price,    "slug": slug.current,    "images": images[]{      _key,      "alt": asset->alt,      "url": asset->url    }  }
+export type ALL_PRODUCTS_QUERYResult = Array<{
+  _id: string;
+  name: string;
+  price: number;
+  slug: string;
+  images: Array<{
+    _key: string;
+    alt: null;
+    url: string | null;
+  }>;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"product\" && stockLevel > 0] | order(_createdAt desc) {\n    _id,\n    name,\n    price,\n    \"slug\": slug.current,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }[0...4]\n": LATEST_PRODUCTS_QUERYResult;
     "\n  *[_type == \"product\" && slug.current == $productSlug][0] {\n    _id,\n    name,\n    \"slug\": slug.current,\n    price,\n    stockLevel,\n    description,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": SINGLE_PRODUCT_QUERYResult;
+    "\n  *[_type == \"product\" && stockLevel > 0] | order(_createdAt desc) {\n    _id,\n    name,\n    price,\n    \"slug\": slug.current,\n    \"images\": images[]{\n      _key,\n      \"alt\": asset->alt,\n      \"url\": asset->url\n    }\n  }\n": ALL_PRODUCTS_QUERYResult;
   }
 }
