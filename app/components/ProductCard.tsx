@@ -20,8 +20,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           className="object-cover rounded-md mb-4 mx-auto aspect-square"
         />
         <h2 className="text-xl font-bold">{product.name}</h2>
-        <div className="flex justify-end flex-grow items-end">
-          <span className="text-lg text-lime-600 font-bold">
+
+        {product.localPickup ? (
+          <span className="text-sm my-2 mx-auto capitalize text-center italic text-blue-900 bg-blue-400 border-2 rounded-xl p-1">
+            Local collection available
+          </span>
+        ) : null}
+        <div className="flex justify-end grow items-end">
+          <span className="text-xl text-lime-600 font-bold">
             £{product.price}
           </span>
         </div>

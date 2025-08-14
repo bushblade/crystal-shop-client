@@ -10,6 +10,7 @@ const ALL_PRODUCTS_QUERY = defineQuery(`
     name,
     price,
     "slug": slug.current,
+    localPickup,
     "images": images[]{
       _key,
       "alt": asset->alt,
