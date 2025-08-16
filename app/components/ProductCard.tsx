@@ -13,16 +13,16 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link to={`/products/${product.slug}`} className="block h-full">
-      <div className="border-2 rounded-lg p-4 h-full flex flex-col">
+      <div className="border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow rounded-lg p-4 h-full flex flex-col">
         <img
           src={`${primaryImage.url}?auto=format&w=400&h=400&fit=crop&crop=center`}
           alt={product.name}
           className="object-cover rounded-md mb-4 mx-auto aspect-square"
         />
-        <h2 className="text-xl font-bold">{product.name}</h2>
+        <h2 className="text-xl text-center font-bold">{product.name}</h2>
 
         {product.localPickup ? (
-          <span className="text-sm my-2 mx-auto capitalize text-center italic text-blue-900 bg-blue-400 border-2 rounded-xl p-1">
+          <span className="text-sm my-2 mx-auto capitalize text-center italic bg-slate-500 border-slate-500 text-white px-2 shadow-sm border-2 rounded-xl p-1">
             Local collection available
           </span>
         ) : null}
