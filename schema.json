@@ -235,6 +235,13 @@
         },
         "optional": false
       },
+      "countryOfOrigin": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "weight": {
         "type": "objectAttribute",
         "value": {
@@ -247,7 +254,7 @@
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "stockLevel": {
         "type": "objectAttribute",
