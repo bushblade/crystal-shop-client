@@ -21,12 +21,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
         <h2 className="text-xl text-center font-bold">{product.name}</h2>
 
-        {product.localPickup ? (
-          <span className="text-sm my-2 mx-auto capitalize text-center italic bg-slate-500 border-slate-500 text-white px-2 shadow-sm border-2 rounded-xl p-1">
-            Local collection available
-          </span>
-        ) : null}
-        <div className="flex justify-end grow items-end">
+        <div className="flex justify-end grow items-end gap-2">
+          {product.localPickup ? (
+            <span className="text-xs capitalize italic bg-slate-500 border-slate-500 text-white shadow-sm border-2 rounded-xl py-1 px-2 mr-auto">
+              Local collection available
+            </span>
+          ) : null}
           <span className="text-xl text-lime-600 font-bold">
             £{product.price}
           </span>
