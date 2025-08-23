@@ -47,7 +47,7 @@ export default function ProductPage({ loaderData }: Route.ComponentProps) {
       <title>{product.name}</title>
       <meta name="description" content={product.description} />
 
-      <main className="max-w-7xl mx-auto p-4 md:p-8">
+      <div className="max-w-7xl mx-auto p-4 md:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Image Section */}
           <ProductGallery images={product.images} productName={product.slug} />
@@ -109,7 +109,7 @@ export default function ProductPage({ loaderData }: Route.ComponentProps) {
             </div>
           </section>
         </div>
-      </main>
+      </div>
     </>
   )
 }
